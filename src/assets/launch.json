@@ -7,7 +7,7 @@
   "rocket": {
     "rocket_id": "falcon9",
     "rocket_name": "Falcon 9",
-    "rocket_type": "FT",
+    "rocket_type": "FT",  
     "first_stage": {
       "cores": [
         {

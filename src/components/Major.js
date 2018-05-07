@@ -3,15 +3,50 @@ import PropTypes from 'prop-types';
 import launch from 'assets/launch.json';
 import launchSite from 'assets/launch_site.json';
 import rocket from 'assets/rocket.json';
+import { format } from 'date-fns';
+
+const currentTime = format(Date.now(), 'YYYY/MM/DD HH:MM');
 
 class Major extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentDate: Date.now(),
+    };}
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+  console.log(1);
+    this.setState({
+      currentDate: Date.now()
+    });
+  }
+
   render() {
+    let currentDate = Date.now();
+    let launchDate = launch.launch_date_unix;
+    let seconds = Math.floor((launchDate - Math.floor(currentDate / 1000)));
+    let minutes = Math.floor(seconds / 60);
+    let hours = Math.floor(minutes / 60);
+    let days = Math.floor(hours / 24);
+    hours = hours - (days * 24);
+    minutes = minutes - (days * 24 * 60) - (hours * 60);
     return (
       <main className="launch">
         <article className="launch-info">
-          <p className="date">{(new Date().toLocaleDateString())}</p>
+          <p className="date">{currentTime}</p>
           <h2>{rocket.name} launch</h2>
-          <h4 className="counting-down">TO START</h4>
+          <p className="counting-down">{days + ' DAYS ' + hours + ' HRS ' + minutes + ' MINS TO START'}</p>
           <p>
             <img src={launch.links.mission_patch} width="180" height="180" />
           </p>
