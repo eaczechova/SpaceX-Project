@@ -6,10 +6,15 @@ import Links from '../components/Links';
 import FooterSection from '../components/FooterSection';
 
 class LaunchDetails extends React.Component {
+
+  static propTypes = {
+    onBackClick: PropTypes.func.isRequired,
+  }
+
   render() {
     return (
       <div>
-        <Header />
+        <Header onBackClick={this.props.onBackClick} />
         <Major />
         <Links />
         <FooterSection />

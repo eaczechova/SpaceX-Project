@@ -5,7 +5,7 @@ import launch from 'assets/launch.json';
 
 
 class Links extends React.Component {
-  render() {
+  render () {
     return (
       <section className="links">
         <img src={background} width="100%" height="400" />

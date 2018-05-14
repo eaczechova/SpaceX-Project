@@ -5,7 +5,7 @@ import launchSite from 'assets/launch_site.json';
 import rocket from 'assets/rocket.json';
 import { format } from 'date-fns';
 
-const currentTime = format(Date.now(), 'YYYY/MM/DD HH:MM');
+const currentTime = format(Date.now(), 'DD MMMM YYYY');
 
 class Major extends React.Component {
   constructor(props) {
