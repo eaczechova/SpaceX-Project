@@ -1,58 +1,41 @@
 import { hot } from 'react-hot-loader';
 import * as React from 'react';
-import launch from './assets/launch.json';
-import launchSite from './assets/launch_site.json';
-import rocket from './assets/rocket.json';
 import LaunchDetails from './view/LaunchDetails';
-
-import launches from './assets/launches.json';
 import LaunchesList from './view/LaunchesList';
 import './styles/theme.sass';
-
 
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
-      viewName: 'details',
+      screen: 'details',
     };
     this.handleLaunchClick = this.handleLaunchClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
-  get activeViewComponent() {
-    const { viewName } = this.state;
-
-    switch (viewName) {
-      case 'list':
-        return (
-          <LaunchesList
-            onLaunchClick={this.handleLaunchClick}
-          />
-        );
-
-      case 'details':
-        return (
-          <LaunchDetails
-            onBackClick={this.handleBackClick}
-          />
-        );
-
-      default: return null;
-    }
-  }
-
   handleLaunchClick() {
-    this.setState({ viewName: 'details' });
+    this.setState({ screen: 'details' });
   }
 
   handleBackClick() {
-    this.setState({ viewName: 'list' });
+    this.setState({ screen: 'list' });
   }
+
   render() {
     return (
       <main>
-        {this.activeViewComponent}
+        {this.state.screen === 'list' && (
+          <LaunchesList
+            onLaunchClick={this.handleLaunchClick}
+          />
+        )}
+
+        {this.state.screen === 'details' && (
+          <LaunchDetails
+            onBackClick={this.handleBackClick}
+          />
+        )}
       </main>
     );
   }
